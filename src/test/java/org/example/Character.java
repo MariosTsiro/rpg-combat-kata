@@ -7,12 +7,14 @@ public class Character {
     private int level;
 
     private int range;
+    private int position;
 
     public Character() {
         this.health = 1000;
         this.isAlive = true;
         this.level = 1;
         this.range = 0;
+        this.position =0;
     }
 
     public Character(String type) {
@@ -52,9 +54,14 @@ public class Character {
 
     public void dealDamage(Character other) {
         if (this == other) return;
-
+        if(isNotInRange(other))return;
         int damage = 100;
         other.receiveDamage((int) (damage * getMultiplicator(other)));
+    }
+
+    private boolean isNotInRange(Character other) {
+        int difference = other.position - this.position;
+        return Math.abs(difference) > this.range;
     }
 
     private double getMultiplicator(Character other) {
