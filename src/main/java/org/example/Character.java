@@ -100,4 +100,8 @@ public class Character {
     public void moveLeft() {
         this.position--;
     }
+
+    public void joinFaction(Faction faction) {
+        faction.take(this);
+    }
 }

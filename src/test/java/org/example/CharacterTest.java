@@ -139,4 +139,28 @@ public class CharacterTest {
         assertThat(ch.getHealth()).isEqualTo(900);
     }
 
+    @Test
+    public void player_can_join_faction(){
+        Faction ally = new Faction("ally");
+        assertThat(ally).isNotNull();
+        Character ch = new Character();
+        ch.joinFaction(ally);
+        assertThat(ally.getPlayers()).contains(ch);
+        Character enemy = new Character();
+        assertThat(ally.getPlayers()).doesNotContain(enemy);
+    }
+
+    @Test
+    public void players_from_same_faction_cannot_attack_each_other(){
+        Faction ally = new Faction("ally");
+        Character ch = new Character();
+        Character allied = new Character();
+        ch.joinFaction(ally);
+        allied.joinFaction(ally);
+        ch.dealDamage(allied);
+        assertThat(allied.getHealth()).isEqualTo(1000);
+    }
+
+
+
 }
