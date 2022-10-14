@@ -108,6 +108,13 @@ public class CharacterTest {
         assertThat(enemy.getHealth()).isEqualTo(950);
     }
 
+    @Test
+    public void character_should_have_attack_range(){
+        Character ch = new Character("melee");
+        assertThat(ch.getAttackRange()).isEqualTo(2);
+        Character ch2  = new Character("ranged");
+        assertThat(ch2.getAttackRange()).isEqualTo(20);
+    }
 
 
 }
