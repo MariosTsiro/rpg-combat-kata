@@ -59,7 +59,7 @@ public class Character {
         return 1;
     }
 
-    public void levelUp() {
-        this.level++;
+    public void levelUp(int level) {
+        this.level+= level;
     }
 }

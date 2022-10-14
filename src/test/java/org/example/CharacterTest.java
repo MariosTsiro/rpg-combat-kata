@@ -71,7 +71,7 @@ public class CharacterTest {
     public void character_should_have_level(){
         Character ch = new Character();
         assertThat(ch.getLevel()).isEqualTo(1);
-        ch.levelUp();
+        ch.levelUp(1);
         assertThat(ch.getLevel()).isEqualTo(2);
     }
 
