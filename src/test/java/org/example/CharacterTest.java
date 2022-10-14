@@ -18,7 +18,7 @@ public class CharacterTest {
     @Test
     public void character_takes_damage(){
         Character ch = new Character();
-        ch.damage(100);
+        ch.receiveDamage(100);
         assertThat(ch.getHealth()).isEqualTo(900);
     }
 
@@ -26,14 +26,14 @@ public class CharacterTest {
     @Test
     public void character_health_should_not_be_less_than_zero(){
         Character ch = new Character();
-        ch.damage(1001);
+        ch.receiveDamage(1001);
         assertThat(ch.getHealth()).isZero();
     }
 
     @Test
     public void character_can_be_healed(){
         Character ch = new Character();
-        ch.damage(200);
+        ch.receiveDamage(200);
         ch.heal(100);
         assertThat(ch.getHealth()).isEqualTo(900);
     }
@@ -48,7 +48,7 @@ public class CharacterTest {
     @Test
     public void character_can_die(){
         Character ch = new Character();
-        ch.damage(1000);
+        ch.receiveDamage(1000);
         assertThat(ch.isAlive()).isFalse();
     }
 
@@ -61,7 +61,7 @@ public class CharacterTest {
     @Test
     public void dead_character_should_not_be_healed(){
         Character ch = new Character();
-        ch.damage(1000);
+        ch.receiveDamage(1000);
         ch.heal(10);
         assertThat(ch.isAlive()).isFalse();
     }
@@ -79,14 +79,14 @@ public class CharacterTest {
     public void character_can_deal_damage(){
         Character ch = new Character();
         Character enemy = new Character();
-        ch.attack(enemy);
+        ch.dealDamage(enemy);
         assertThat(enemy.getHealth()).isNotEqualTo(1000);
     }
 
     @Test
     public void character_cannot_deal_damage_to_itself(){
         Character ch = new Character();
-        ch.attack(ch);
+        ch.dealDamage(ch);
         assertThat(ch.getHealth()).isEqualTo(1000);
     }
 
@@ -95,7 +95,7 @@ public class CharacterTest {
         Character ch = new Character();
         Character enemy = new Character();
         ch.levelUp(6);
-        ch.attack(enemy);
+        ch.dealDamage(enemy);
         assertThat(enemy.getHealth()).isEqualTo(850);
     }
 
@@ -104,7 +104,7 @@ public class CharacterTest {
         Character ch = new Character();
         Character enemy = new Character();
         enemy.levelUp(6);
-        ch.attack(enemy);
+        ch.dealDamage(enemy);
         assertThat(enemy.getHealth()).isEqualTo(950);
     }
 

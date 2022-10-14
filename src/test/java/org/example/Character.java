@@ -6,17 +6,27 @@ public class Character {
     private boolean isAlive;
     private int level;
 
+    private int range;
+
     public Character() {
         this.health = 1000;
         this.isAlive = true;
         this.level = 1;
+        this.range = 0;
     }
+
+    public Character(String type) {
+        this();
+        if(type.equalsIgnoreCase("melee")) range=2;
+        if(type.equalsIgnoreCase("ranged"))range=20;
+    }
+
 
     public int getHealth() {
         return this.health;
     }
 
-    public void damage(int damage) {
+    public void receiveDamage(int damage) {
         this.health -= damage;
         if (this.health <= 0) {
             this.health = 0;
@@ -40,11 +50,11 @@ public class Character {
         return this.level;
     }
 
-    public void attack(Character other) {
+    public void dealDamage(Character other) {
         if (this == other) return;
 
         int damage = 100;
-        other.damage((int) (damage * getMultiplicator(other)));
+        other.receiveDamage((int) (damage * getMultiplicator(other)));
     }
 
     private double getMultiplicator(Character other) {
@@ -66,5 +76,9 @@ public class Character {
 
     public void levelUp(int level) {
         this.level += level;
+    }
+
+    public int getAttackRange() {
+        return this.range;
     }
 }
