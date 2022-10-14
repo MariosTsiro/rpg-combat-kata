@@ -88,4 +88,16 @@ public class Character {
     public int getAttackRange() {
         return this.range;
     }
+
+    public int getPosition() {
+        return this.position;
+    }
+
+    public void moveRight() {
+        this.position++;
+    }
+
+    public void moveLeft() {
+        this.position--;
+    }
 }
