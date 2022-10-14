@@ -60,9 +60,19 @@ public class Character {
 
     public void dealDamage(Character other) {
         if (this == other) return;
+        if (isInSameFactionThan(other))return;
         if(isNotInRange(other))return;
         int damage = 100;
         other.receiveDamage((int) (damage * getMultiplicator(other)));
+    }
+
+    private boolean isInSameFactionThan(Character other) {
+        if (joinedFanctions == null) return false;
+        long count = joinedFanctions.stream()
+                .map(Faction::getPlayers)
+                .filter(list -> list.containsAll(List.of(this,other)))
+                .count();
+        return count > 0;
     }
 
     private boolean isNotInRange(Character other) {
@@ -110,5 +120,10 @@ public class Character {
     public void joinFaction(Faction faction) {
         faction.take(this);
         joinedFanctions.add(faction);
+    }
+
+    public void leaveFaction(Faction ally) {
+        ally.getPlayers().remove(this);
+        joinedFanctions.remove(this);
     }
 }
