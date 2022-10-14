@@ -90,5 +90,24 @@ public class CharacterTest {
         assertThat(ch.getHealth()).isEqualTo(1000);
     }
 
+    @Test
+    public void enemy_should_take_50_percent_more_damage(){
+        Character ch = new Character();
+        Character enemy = new Character();
+        ch.levelUp(6);
+        ch.attack(enemy);
+        assertThat(enemy.getHealth()).isEqualTo(850);
+    }
+
+    @Test
+    public void enemy_should_take_50_percent_less_damage(){
+        Character ch = new Character();
+        Character enemy = new Character();
+        enemy.levelUp(6);
+        ch.attack(enemy);
+        assertThat(enemy.getHealth()).isEqualTo(950);
+    }
+
+
 
 }

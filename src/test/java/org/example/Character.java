@@ -41,8 +41,22 @@ public class Character {
     }
 
     public void attack(Character other) {
-        if (this != other)
-            other.damage(100);
+        int damage = 100;
+        if (this != other) {
+            other.damage((int) (damage*getMultiplicator(other)));
+        }
+    }
+
+    private double getMultiplicator(Character other) {
+        if (this != other) {
+            if (this.level >= other.getLevel() + 5) {
+                return 1.5;
+            } else if (this.level <= other.getLevel() - 5) {
+                return 0.5;
+            }
+
+        }
+        return 1;
     }
 
     public void levelUp() {
