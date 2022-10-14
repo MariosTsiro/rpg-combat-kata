@@ -44,9 +44,7 @@ public class Character {
         if (this == other) return;
 
         int damage = 100;
-        if (this != other) {
-            other.damage((int) (damage*getMultiplicator(other)));
-        }
+        other.damage((int) (damage * getMultiplicator(other)));
     }
 
     private double getMultiplicator(Character other) {
