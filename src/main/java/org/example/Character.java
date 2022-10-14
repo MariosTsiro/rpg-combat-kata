@@ -1,5 +1,9 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class Character {
 
     private int health;
@@ -8,6 +12,8 @@ public class Character {
 
     private int range;
     private int position;
+
+    List<Faction> joinedFanctions = new ArrayList<>();
 
     public Character() {
         this.health = 1000;
@@ -103,5 +109,6 @@ public class Character {
 
     public void joinFaction(Faction faction) {
         faction.take(this);
+        joinedFanctions.add(faction);
     }
 }

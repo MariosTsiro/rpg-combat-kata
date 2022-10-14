@@ -161,6 +161,31 @@ public class CharacterTest {
         assertThat(allied.getHealth()).isEqualTo(1000);
     }
 
+    @Test
+    public void multiple_factions(){
+        Faction ally = new Faction("ally");
+        Faction horde = new Faction("horde");
+        Faction marios = new Faction("marios");
+        Character ch = new Character();
+        Character allied = new Character();
+        ch.joinFaction(ally);
+        ch.joinFaction(horde);
+
+        allied.joinFaction(ally);
+        allied.joinFaction(marios);
+        ch.dealDamage(allied);
+        assertThat(allied.getHealth()).isEqualTo(1000);
+    }
+
+    @Test
+    public void players_can_leave_factions(){
+        Faction ally = new Faction("ally");
+        Character ch = new Character();
+        ch.joinFaction(ally);
+        ch.leaveFaction(ally);
+        assertThat(ally.getPlayers()).isEmpty();
+    }
+
 
 
 }
