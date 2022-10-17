@@ -213,6 +213,21 @@ public class CharacterTest {
         assertThat(enemy.getHealth()).isEqualTo(900);
     }
 
+    @Test
+    public void player_can_attack_things(){
+        Character  ch = new Character();
+        Thing tree = new Thing();
+        ch.dealDamageTo(tree);
+        assertThat(tree.getHealth()).isEqualTo(900);
+    }
+
+    @Test
+    public void thing_can_have_individual_health(){
+        Thing house = new Thing(2000);
+        assertThat(house.getHealth()).isEqualTo(2000);
+    }
+
+
     // Play can damage other THINGS. that are not characters. -> House, Tree, anything..
     // Players and  Things do have some things in common. like health, like take damage...
     // Superclass with basics things. Character and Things extends this.
