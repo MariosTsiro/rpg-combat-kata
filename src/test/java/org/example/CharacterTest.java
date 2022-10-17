@@ -3,6 +3,8 @@ package org.example;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.Callable;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class CharacterTest {
@@ -214,5 +216,6 @@ public class CharacterTest {
     // Play can damage other THINGS. that are not characters. -> House, Tree, anything..
     // Players and  Things do have some things in common. like health, like take damage...
     // Superclass with basics things. Character and Things extends this.
+
 
 }

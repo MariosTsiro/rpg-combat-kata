@@ -57,7 +57,7 @@ public class Character extends GameObject {
         return count > 0;
     }
 
-    private boolean isNotInRange(Character other) {
+    private boolean isNotInRange(GameObject other) {
         int difference = other.position - this.position;
         return Math.abs(difference) > this.range;
     }
