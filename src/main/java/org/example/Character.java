@@ -48,6 +48,13 @@ public class Character extends GameObject {
         other.receiveDamage((int) (damage * getMultiplicator(other)));
     }
 
+    public void dealDamageTo(GameObject object) {
+        if (this == object) return;
+        if (isNotInRange(object)) return;
+        int damage = 100;
+        object.receiveDamage(damage);
+    }
+    
     private boolean isInSameFactionThan(Character other) {
         if (joinedFanctions == null) return false;
         long count = joinedFanctions.stream()
