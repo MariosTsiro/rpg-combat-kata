@@ -1,26 +1,20 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class Character {
+public class Character extends GameObject {
 
-    private int health;
-    private boolean isAlive;
     private int level;
 
     private int range;
-    private int position;
 
     List<Faction> joinedFanctions = new ArrayList<>();
 
     public Character() {
-        this.health = 1000;
-        this.isAlive = true;
+        super();
         this.level = 1;
         this.range = 0;
-        this.position =0;
     }
 
     public Character(String type) {
@@ -30,18 +24,9 @@ public class Character {
     }
 
 
-    public int getHealth() {
-        return this.health;
+    public void heal(Character other, int i) {
+        if(this.isInSameFactionThan(other)) other.heal(i);
     }
-
-    public void receiveDamage(int damage) {
-        this.health -= damage;
-        if (this.health <= 0) {
-            this.health = 0;
-            this.isAlive = false;
-        }
-    }
-
     public void heal(int i) {
         if (!isAlive()) return;
         this.health += i;
@@ -50,15 +35,11 @@ public class Character {
         }
     }
 
-    public boolean isAlive() {
-        return this.isAlive;
-    }
-
     public int getLevel() {
         return this.level;
     }
 
-    public void dealDamage(Character other) {
+    public void dealDamageTo(Character other) {
         if (this == other) return;
         if (isInSameFactionThan(other))return;
         if(isNotInRange(other))return;
@@ -103,10 +84,6 @@ public class Character {
 
     public int getAttackRange() {
         return this.range;
-    }
-
-    public int getPosition() {
-        return this.position;
     }
 
     public void moveRight() {

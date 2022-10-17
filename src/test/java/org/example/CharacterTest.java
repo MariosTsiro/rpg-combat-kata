@@ -79,14 +79,14 @@ public class CharacterTest {
     public void character_can_deal_damage(){
         Character ch = new Character();
         Character enemy = new Character();
-        ch.dealDamage(enemy);
+        ch.dealDamageTo(enemy);
         assertThat(enemy.getHealth()).isNotEqualTo(1000);
     }
 
     @Test
     public void character_cannot_deal_damage_to_itself(){
         Character ch = new Character();
-        ch.dealDamage(ch);
+        ch.dealDamageTo(ch);
         assertThat(ch.getHealth()).isEqualTo(1000);
     }
 
@@ -95,7 +95,7 @@ public class CharacterTest {
         Character ch = new Character();
         Character enemy = new Character();
         ch.levelUp(6);
-        ch.dealDamage(enemy);
+        ch.dealDamageTo(enemy);
         assertThat(enemy.getHealth()).isEqualTo(850);
     }
 
@@ -104,7 +104,7 @@ public class CharacterTest {
         Character ch = new Character();
         Character enemy = new Character();
         enemy.levelUp(6);
-        ch.dealDamage(enemy);
+        ch.dealDamageTo(enemy);
         assertThat(enemy.getHealth()).isEqualTo(950);
     }
 
@@ -133,9 +133,9 @@ public class CharacterTest {
         enemy.moveRight();
         enemy.moveRight();
         enemy.moveRight();
-        ch.dealDamage(enemy);
+        ch.dealDamageTo(enemy);
         assertThat(enemy.getHealth()).isEqualTo(1000);
-        enemy.dealDamage(ch);
+        enemy.dealDamageTo(ch);
         assertThat(ch.getHealth()).isEqualTo(900);
     }
 
@@ -157,7 +157,7 @@ public class CharacterTest {
         Character allied = new Character();
         ch.joinFaction(ally);
         allied.joinFaction(ally);
-        ch.dealDamage(allied);
+        ch.dealDamageTo(allied);
         assertThat(allied.getHealth()).isEqualTo(1000);
     }
 
@@ -173,7 +173,7 @@ public class CharacterTest {
 
         allied.joinFaction(ally);
         allied.joinFaction(marios);
-        ch.dealDamage(allied);
+        ch.dealDamageTo(allied);
         assertThat(allied.getHealth()).isEqualTo(1000);
     }
 
@@ -186,6 +186,32 @@ public class CharacterTest {
         assertThat(ally.getPlayers()).isEmpty();
     }
 
+    @Test
+    public void players_of_same_faction_can_heal_each_other(){
+        Faction ally = new Faction("ally");
+        Character ch = new Character();
+        ch.joinFaction(ally);
+        Character enemy = new Character();
+        enemy.dealDamageTo(ch);
+        Character ally_character = new Character();
+        ally_character.joinFaction(ally);
+        ally_character.heal(ch,50);
+        assertThat(ch.getHealth()).isEqualTo(950);
+    }
 
+    @Test
+    public void enemies_cannot_heal_each_other(){
+        Faction ally = new Faction("ally");
+        Character ch = new Character();
+        ch.joinFaction(ally);
+        Character enemy = new Character();
+        ch.dealDamageTo(enemy);
+        ch.heal(enemy, 50);
+        assertThat(enemy.getHealth()).isEqualTo(900);
+    }
+
+    // Play can damage other THINGS. that are not characters. -> House, Tree, anything..
+    // Players and  Things do have some things in common. like health, like take damage...
+    // Superclass with basics things. Character and Things extends this.
 
 }
