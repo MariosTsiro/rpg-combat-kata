@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -128,8 +129,8 @@ public class CharacterTest {
 
     @Test
     public void character_can_only_attack_inRange(){
-        Character ch = new Character("melee");
-        Character enemy = new Character("ranged");
+        Character ch = new Character("melee"); //Range 2
+        Character enemy = new Character("ranged"); // Range 20
         enemy.moveRight();
         enemy.moveRight();
         enemy.moveRight();

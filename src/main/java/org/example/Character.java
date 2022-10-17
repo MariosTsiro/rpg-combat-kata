@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Character extends GameObject {
@@ -41,8 +42,8 @@ public class Character extends GameObject {
 
     public void dealDamageTo(Character other) {
         if (this == other) return;
-        if (isInSameFactionThan(other))return;
-        if(isNotInRange(other))return;
+        if (isNotInRange(other)) return;
+        if (isInSameFactionThan(other)) return;
         int damage = 100;
         other.receiveDamage((int) (damage * getMultiplicator(other)));
     }
@@ -51,7 +52,7 @@ public class Character extends GameObject {
         if (joinedFanctions == null) return false;
         long count = joinedFanctions.stream()
                 .map(Faction::getPlayers)
-                .filter(list -> list.containsAll(List.of(this,other)))
+                .filter(list -> new HashSet<>(list).containsAll(List.of(this,other)))
                 .count();
         return count > 0;
     }
